@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BookController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +41,15 @@ Route::delete(
     [CategoryController::class, 'deletePermanent']
 )->name('categories.delete-permanent');
 
+Route::get('/ajax/categories/search', [
+    CategoryController::class,
+    'ajaxSearch'
+]);
+
 Route::resource('categories', CategoryController::class);
+
+Route::get('/books/trash', [BookController::class, 'trash'])->name('books.trash');
+Route::post('/books/{book}/restore', [BookController::class, 'restore'])->name('books.restore');
+Route::delete('/books/{id}/delete-permanent', [BookController::class, 'deletePermanent'])->name('books.delete-permanent');
+
+Route::resource('books', BookController::class);
