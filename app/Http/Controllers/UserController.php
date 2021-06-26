@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = \App\Models\User::paginate(10);
+        $users = \App\Models\User::orderBy('id', 'DESC')->paginate(10);
         $filterKeyword = $request->get('keyword');
         $status = $request->get('status');
         if ($status) {
