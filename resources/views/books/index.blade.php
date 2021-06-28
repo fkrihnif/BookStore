@@ -3,9 +3,28 @@
 @section('content') 
  <div class="row">
  <div class="col-md-12">
+    @if(session('status'))
+    <div class="alert alert-success">
+    {{session('status')}}
+    </div>
+    @endif
+   
     <div class="row">
-        <div class="col-md-6"></div>
         <div class="col-md-6">
+            <form
+            action="{{route('books.index')}}"
+           >
+           <div class="input-group">
+            <input name="keyword" type="text" value="{{Request::get('keyword')}}"
+           class="form-control" placeholder="Filter by title">
+            <div class="input-group-append">
+            <input type="submit" value="Filter" class="btn btn-primary">
+            </div>
+           </div>
+           </form>
+        </div>
+        <div class="col-md-6">
+         
         <ul class="nav nav-pills card-header-pills">
         <li class="nav-item">
         <a class="nav-link {{Request::get('status') == NULL &&
